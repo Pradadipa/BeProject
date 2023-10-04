@@ -1,21 +1,27 @@
 const formService = require('../services/formService')
-// const { pool } = require('../config/databases')
 
 //Get
 const getAllForm = async (req, res) =>{
-    const form = await formService.getAllForm()
-    res.status(200).json({
+    try {
+        const form = await formService.getAllForm()
+        res.status(200).json({
         message: "Sukses Mengambil Input form",
         data: form
     })
+    } catch (error){
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 }
 //Post
 const createForm =  async(req,res) => {
-    const createdForm = await formService.createForm(req.body)
-    res.status(201).json({
-        message: "Sukses menginput",
-        data: createdForm
-    })
+    try {
+        const formId = await formService.createForm(req.body);
+        res.status(201).json({ formId });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+      }
 }
 
 module.exports = { createForm, getAllForm }

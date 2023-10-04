@@ -1,18 +1,33 @@
 const { pool } = require('../config/databases')
+const { prisma } = require('../config/prisma')
 
 //Get
 const getAllForm = async () => {
-    const connection = await pool.getConnection()
-    const [form] = await connection.query('SELECT * FROM form')
-    return form
+    try{
+        const form = prisma.form.findMany()
+        return form
+    } catch (error){
+        console.error(error);
+        return error
+    }
+       
 }
 
 //Post
 const createForm = async (form) => {
-    const connection = await pool.getConnection()
-    const [createdForm] = await connection.query('INSERT INTO form (name, email, message) VALUE (?, ?, ?)',
-    [form.name, form.email, form.message]);
-    return createdForm;
+    try{
+        const createdForm = await prisma.form.create({
+            data: {
+                name : form.name,
+                email : form.email,
+                message : form.message,
+            }
+            })
+        return createdForm;
+    } catch (error){
+        console.error(error);
+        return error
+    }
 }
 
 module.exports =  { createForm, getAllForm }

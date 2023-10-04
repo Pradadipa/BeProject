@@ -1,12 +1,36 @@
-// const { pool } = require('../config/databases')
 const productService = require('../services/productsService')
 
+//Get
 const getAllProduct = async (req, res) => {
-   const product = await productService.getAllProduct()
-   res.status(200).json({
-    message: "Sukses mengirim data",
-    data: product
+   try{
+      const product = await productService.getAllProduct()
+      res.status(200).json({
+      data: product
    })
+   } catch (error){
+      console.error(error);
+      res.status(500).json({ error: 'Internal server error' });
+   }
 }
 
-module.exports = { getAllProduct }
+
+
+//Get by Id
+async function getProductById(req, res) {
+   const { productId } = req.params;
+   try {
+     const product = await productService.getProductById(productId);
+     if (!product) {
+       return res.status(404).json({ error: 'User not found' });
+     }
+     res.status(200).json({
+       message: "Successfully fetched product",
+       data: product
+     });
+   } catch (error) {
+     console.error(error);
+     res.status(500).json({ error: 'Internal server error' });
+   }
+ }
+
+ module.exports = { getAllProduct, getProductById }

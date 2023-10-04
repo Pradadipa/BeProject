@@ -4,18 +4,19 @@ const { productRoute } = require('./routes/productRoutes')
 const { formRoute } = require('./routes/formRoutes')
 const { aboutRoute } = require('./routes/aboutRoutes')
 const { pool } = require('./config/databases')
-
+const cors = require('cors')
 
 const app = express();
 const PORT = process.env.PORT;
 
+app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
-//rute
+//rute product
 app.use("/", productRoute)
 // rute untuk form
-app.use("/form", formRoute )
+app.use("/", formRoute )
 // rute untuk about
 app.use("/about", aboutRoute)
 

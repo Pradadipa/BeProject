@@ -1,0 +1,84 @@
+-- CREATE DATABASE IF NOT EXISTS `express_mysql`;
+-- USE `express_mysql`;
+
+-- CREATE TABLE IF NOT EXISTS Products (
+--  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--  nama VARCHAR(225) NOT NULL,
+--  harga INT NOT NULL,
+--  deskripsi VARCHAR(225) NOT NULL
+-- )
+
+-- --Insert value
+-- INSERT INTO Products(nama, harga, deskripsi)
+--  VALUES('Baju Adidas', '100000', 'Ini adalah baju adidas');
+
+--Membuat databases RobinCode
+CREATE DATABASE IF NOT EXISTS `RobinCode.db`;
+USE `RobinCode.db`;
+
+--Membuat Table team-members
+CREATE TABLE IF NOT EXISTS team_members (
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(255) NOT NULL,
+ role VARCHAR(255) NOT NULL,
+ socialMedia VARCHAR(255) NOT NULL,
+ image VARCHAR(255) NOT NULL
+);
+
+--Membuat Table products
+CREATE TABLE IF NOT EXISTS products (
+ prod_id INT NOT NULL PRIMARY KEY,
+ prod_name VARCHAR(255) NOT NULL,
+ prod_brand VARCHAR(255) NOT NULL,
+ prod_price FLOAT NOT NULL,
+ prod_image VARCHAR(255) NOT NULL
+);
+
+--Insert Value Products 
+ INSERT INTO PRODUCTS VALUES
+    (1, "Adicolor Classics Hoodie", "H&M", 19.99, "https://i.ibb.co/YW9RQ16/hoodie-model.jpg"),
+    (2, "Blue Jeans", "Levi's", 20.5,"https://ibb.co/cwGFj7J" ),
+    (3, "Leather-Effect Trench Coat", "H&M", 32.15, "https://ibb.co/YjT2mGJ" ),
+    (4, "Quilted Jacket", "Uniqlo", 25.85, "https://ibb.co/72SNTYC " ),
+    (5, "Oxford Cotton Shirt", "Lacoste", 12.99, "https://ibb.co/TTnnpqh "),
+    (6, "Short Pants Simply Elegant", "Adidas", 20.5, "https://ibb.co/Pr1hR11"),
+    (7, "Jacquard Knit Sweater", "Uniqlo", 18.25, "https://ibb.co/DwbQnrn"),
+    (8, "Adyant T-Shirts", "Adidas", 20.5, "https://ibb.co/9w5VT30 ");
+
+
+--Membuat Table detail_product
+CREATE TABLE IF NOT EXISTS detail_products (
+   rating FLOAT NOT NULL,
+   description VARCHAR(255) NOT NULL,
+   sizes ENUM('Small', 'Medium', 'Large', 'Extra Large'),
+   reviews VARCHAR(255) NOT NULL,
+   id INT,
+   FOREIGN KEY(id)
+    REFERENCES products(id)
+);
+
+--DROP TABLE products;
+
+--Membuat Table form
+CREATE TABLE IF NOT EXISTS form (
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ name VARCHAR(255) NOT NULL,
+ email VARCHAR(255) NOT NULL,
+ message TEXT NOT NULL
+);
+
+--insert value form
+INSERT INTO form(name, email, message)
+ VALUES('Prada', 'prada.dipa@gmail.com', 'Saya Prada');
+
+--insert value products
+ INSERT INTO products(name, brand, price, image)
+    VALUES('Adicolor Classics Hoodie', 'H&M', '19.99', 'https://i.ibb.co/BP7pWG5/Hand-with-magnifying-glass-looking-for-information-in-charts-and-graphs-Illustration.png');
+
+
+
+
+
+ prod_rating FLOAT,
+ prod_desc TEXT,
+ prod_sizes ENUM('Small', 'Medium', 'Large', 'Extra Large')

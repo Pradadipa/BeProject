@@ -1,4 +1,5 @@
-const { pool } = require('../config/databases')
+
+const { request } = require('express');
 const { prisma } = require('../config/prisma')
 
 //Get All
@@ -13,22 +14,21 @@ const getAllProduct = async () => {
 }
 
 //Get by Id
-
-async function getProductById(productId) {
+async function getProductById(userid) {
     try {
-        const product = await prisma.products.findUnique({
-            where: {
-                id: 1
-            },
-            // select: {
-            //     id : true
-            // }
-        });
-        return product;
+      const user = await prisma.products.findUnique({
+        where: {
+          id: Number(userid)
+        }
+      })
+      return user
     } catch (error) {
-        throw new Error(error);
+      throw new Error(error)
     }
-}
+    
+  }
+
+  
 
 
 module.exports = { getAllProduct, getProductById }

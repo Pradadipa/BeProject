@@ -16,16 +16,16 @@ const getAllProduct = async (req, res) => {
 
 
 //Get by Id
-async function getProductById(req, res) {
-   const { productId } = req.params;
+const getProductById = async (request, res) => {
+   const { userid } = request.params;
    try {
-     const product = await productService.getProductById(productId);
-     if (!product) {
+     const user = await productService.getProductById(userid);
+     if (!user) {
        return res.status(404).json({ error: 'User not found' });
      }
      res.status(200).json({
-       message: "Successfully fetched product",
-       data: product
+       message: "Successfully fetched user",
+       data: user
      });
    } catch (error) {
      console.error(error);

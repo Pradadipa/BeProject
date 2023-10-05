@@ -16,12 +16,12 @@ const getAllProduct = async () => {
 //Get by Id
 async function getProductById(byId) {
     try {
-      const user = await prisma.products.findUnique({
+      const product = await prisma.products.findUnique({
         where: {
           id: parseInt(byId) 
         }
       })
-      return user
+      return product
     } catch (error) {
       throw new Error(error)
     }

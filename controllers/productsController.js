@@ -17,20 +17,20 @@ const getAllProduct = async (req, res) => {
 
 //Get by Id
 const getProductById = async (request, res) => {
-   const { userid } = request.params;
+   const { byId } = request.params; // Use 'byId' instead of 'userid'
    try {
-     const user = await productService.getProductById(userid);
-     if (!user) {
-       return res.status(404).json({ error: 'User not found' });
+     const product = await productService.getProductById(byId); // Pass 'byId' as the argument
+     if (!product) {
+       return res.status(404).json({ error: 'Product not found' });
      }
      res.status(200).json({
-       message: "Successfully fetched user",
-       data: user
+       message: 'Successfully fetched product',
+       data: product,
      });
    } catch (error) {
      console.error(error);
-     res.status(500).json({ error: 'Internal server error' });
-   }
- }
+     res.status(500).json({ error: 'Internal server error' });
+   }
+ };
 
  module.exports = { getAllProduct, getProductById }
